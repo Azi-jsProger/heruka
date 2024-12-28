@@ -1,6 +1,6 @@
 const express = require('express');
+const serverless = require('serverless-http');
 const app = express();
-const port = 3000;
 
 // Middleware для обработки JSON
 app.use(express.json());
@@ -16,7 +16,5 @@ app.post('/api/data', (req, res) => {
     res.json({ receivedData: data });
 });
 
-// Запуск сервера
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+// Экспорт функции для использования в Vercel
+module.exports.handler = serverless(app);
